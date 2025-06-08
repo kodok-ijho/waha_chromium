@@ -1,6 +1,6 @@
 FROM node:20-slim
 
-# Install Chromium dependencies (install satu kali saja, caching bisa efektif)
+# Install Chromium dependencies (termasuk libgbm1)
 RUN apt-get update && apt-get install -y \
     wget \
     ca-certificates \
@@ -18,23 +18,24 @@ RUN apt-get update && apt-get install -y \
     libxcomposite1 \
     libxdamage1 \
     libxrandr2 \
+    libgbm1 \
+    libxshmfence1 \
+    libxinerama1 \
+    libgl1 \
+    libegl1 \
     xdg-utils \
     --no-install-recommends && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Set working directory
 WORKDIR /app
 
-# Copy package.json dan package-lock.json dulu (agar npm install caching efektif)
-COPY package*.json ./
+# Copy all files
+COPY . .
 
 # Install dependencies
 RUN npm install
 
-# Setelah dependencies terinstall, baru copy seluruh source code
-COPY . .
-
-# Pastikan Puppeteer tidak download Chromium otomatis (karena sudah ada library Chromium)
-ENV PUPPETEER_SKIP_DOWNLOAD=true
-
-CMD ["npm", "start"]
+# Start the app
+CMD ["node", "index.js"]
