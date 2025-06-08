@@ -8,4 +8,4 @@ ENV WAHA_ENGINE=WEBJS
 EXPOSE $PORT
 
 # Command to run WAHA, using the PORT environment variable
-CMD ["npm", "start"]
+CMD ["npm", "start", "--port", "$PORT"]
