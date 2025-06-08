@@ -6,7 +6,6 @@ const puppeteer = require('puppeteer');
   });
   const page = await browser.newPage();
   await page.goto('https://example.com');
-  const title = await page.title();
-  console.log('Page title:', title);
+  console.log(await page.title());
   await browser.close();
 })();
