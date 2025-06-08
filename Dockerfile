@@ -1,6 +1,6 @@
 FROM node:20-slim
 
-# Install Chromium dependencies
+# Install Chromium dependencies (install satu kali saja, caching bisa efektif)
 RUN apt-get update && apt-get install -y \
     wget \
     ca-certificates \
@@ -23,17 +23,18 @@ RUN apt-get update && apt-get install -y \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Set working directory
 WORKDIR /app
 
-# Copy all files
-COPY . .
+# Copy package.json dan package-lock.json dulu (agar npm install caching efektif)
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Optional: set environment variable if Puppeteer used
+# Setelah dependencies terinstall, baru copy seluruh source code
+COPY . .
+
+# Pastikan Puppeteer tidak download Chromium otomatis (karena sudah ada library Chromium)
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 
-# Start the app
-CMD ["node", "index.js"]
+CMD ["npm", "start"]
