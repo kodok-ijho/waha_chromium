@@ -1,0 +1,19 @@
+{
+  "name": "waha-railway",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "nest start",
+    "start:prod": "node dist/main",
+    "build": "nest build"
+  },
+  "dependencies": {
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/common": "^10.0.0",
+    "@adiwajshing/baileys": "github:devlikeapro/Baileys#fork-master-2025-05-01",
+    "sharp": "^0.32.6"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.0.0",
+    "typescript": "^5.0.0"
+  }
+}
