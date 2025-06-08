@@ -2,7 +2,10 @@
 waha with Chromium support
 Waha Railway Deploy
 A WhatsApp API implementation using Waha with Chromium, designed for deployment on Railway.
+
+
 Project Structure
+
 waha-railway-deploy/
 ├── config/           # Environment configuration
 │   └── .env
