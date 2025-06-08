@@ -11,7 +11,7 @@ EXPOSE 3000
 COPY package.json /app/
 RUN npm install --legacy-peer-deps
 
-# Copy the rest of the application code (if you have it)
+# Copy the rest of the application code
 COPY . /app/
 
 # Build the application
