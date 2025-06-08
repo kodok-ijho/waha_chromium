@@ -1,15 +1,17 @@
 {
-  "name": "waha_chromium",
+  "name": "waha-railway-deploy",
   "version": "1.0.0",
-  "description": "Scraper Puppeteer pakai Swagger di Railway",
-  "main": "index.js",
+  "description": "WhatsApp API using Waha with Chromium for Railway deployment",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node src/server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "puppeteer": "^24.0.0",
-    "swagger-ui-express": "^4.6.3",
-    "swagger-jsdoc": "^6.2.8"
-  }
+    "@waha/core": "^1.3.3",
+    "@waha/engines": "^1.3.3",
+    "express": "^4.21.1",
+    "puppeteer": "^23.5.3"
+  },
+  "author": "",
+  "license": "MIT"
 }
