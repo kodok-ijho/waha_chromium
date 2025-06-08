@@ -8,4 +8,5 @@ ENV WAHA_ENGINE=WEBJS
 EXPOSE 3000
 
 # Command to run WAHA
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+CMD ["npm", "start", "--", "--port", "3000"]
