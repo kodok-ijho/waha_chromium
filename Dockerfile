@@ -1,47 +1,16 @@
-# Gunakan image Node.js sebagai base
-FROM node:20-slim
+FROM node:20
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-  chromium \
-  fonts-liberation \
-  libappindicator3-1 \
-  libasound2 \
-  libatk-bridge2.0-0 \
-  libatk1.0-0 \
-  libcups2 \
-  libdbus-1-3 \
-  libdrm2 \
-  libgbm1 \
-  libnspr4 \
-  libnss3 \
-  libx11-xcb1 \
-  libxcomposite1 \
-  libxdamage1 \
-  libxrandr2 \
-  xdg-utils \
-  wget \
-  ca-certificates \
-  --no-install-recommends && \
-  rm -rf /var/lib/apt/lists/*
-
-# Atur env untuk Puppeteer pakai Chromium system
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium \
-    PUPPETEER_SKIP_DOWNLOAD=true \
-    NODE_ENV=production
-
-# Set workdir
+# Buat folder kerja
 WORKDIR /app
 
-# Copy package files dan install deps
-COPY package*.json ./
-RUN npm install --production
-
-# Copy seluruh source code
+# Copy semua file ke container
 COPY . .
 
-# Port yang digunakan WAHA (default 3000)
-EXPOSE 3000
+# Install dependencies
+RUN npm install
+
+# Build WAHA kalau pakai TypeScript atau bundler
+# RUN npm run build
 
 # Jalankan WAHA
-CMD ["npm", "start"]
+CMD ["node", "index.js"]
