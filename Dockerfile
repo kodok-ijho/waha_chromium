@@ -1,11 +1,18 @@
 # Use the official WAHA Docker image as the base
-FROM devlikeapro/waha
+  FROM devlikeapro/waha
 
-# Set the engine to WEBJS (Chromium-based)
-ENV WAHA_ENGINE=WEBJS
+  # Set the engine to WEBJS (Chromium-based)
+  ENV WAHA_ENGINE=WEBJS
 
-# Expose the dynamic port provided by Railway
-EXPOSE $PORT
+  # Expose the dynamic port provided by Railway
+  EXPOSE 3000
 
-# Command to run WAHA, using the PORT environment variable
- CMD ["sh", "-c", "npm start --port $PORT"]
+  # Copy WAHA source code (assuming you add it to your repo)
+  COPY . /app
+
+  # Install dependencies and build (if needed)
+  RUN npm install
+  RUN npm run build
+
+  # Run WAHA with the correct port
+  CMD ["npm", "run", "start:prod", "--", "--port", "$PORT"]
